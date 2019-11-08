@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Results Page</h1>
+  {% for email in emails %}
+    <p>{{email['email']}}</p>
+    <form action='/delete' method='post'>
+     <input type='hidden' name='hidden' value='{{email['id']}}'>
+     <input type = 'submit' value ='delete'>
+    </form>
+  {% endfor %}
+</body>
+</html>

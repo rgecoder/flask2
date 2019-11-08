@@ -41,8 +41,31 @@ def create():
         }
 
         new_email_id = mysql.query_db(query, data)
-        print(new_email_id)  # prints the entire row of new insert
-    return redirect('/')
+        session['id'] = new_email_id
+        
+        print(new_email_id)
+        print(session['id'])  # prints the entire row of new insert
+
+        
+    return redirect('/success')
+
+@app.route('/success')
+def results():
+  mysql = connectToMySQL('emails')
+  all_emails = mysql.query_db("SELECT * FROM emails")
+
+  return render_template("results.html", emails = all_emails)
+
+@app.route('/delete', methods=['POST'])
+def delete():
+  mysql = connectToMySQL('emails')
+  id = int(request.form['hidden'])
+  print(id)
+  query = "DELETE FROM emails WHERE id = '{}';".format(id)
+  
+  print(session['id'])
+  mysql.query_db(query)
+  return redirect('/success')
 
 
 app.run(debug=True)
