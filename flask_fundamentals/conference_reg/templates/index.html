@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  p.error{
+    background-color:red;
+  }
+  
+  </style>
+</head>
+<body>
+  <h1>Reserve your seat at the conference!</h1>
+  <form action='/reserve' method='post'>
+  
+    <label>
+    Name: <input type='text' name='name'>
+    {% with errors = get_flashed_messages(category_filter = ["name"]) %}
+    {% if errors %}
+      {% for msg in errors %}
+        <p class="error">{{msg}}</p>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}    
+  </label>
+  <br>
+
+  <label>
+    Email: <input type='text' name='email'>
+    {% with errors = get_flashed_messages(category_filter = ["email"]) %}
+    {% if errors %}
+      {% for msg in errors %}
+        <p class="error">{{msg}}</p>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}   
+  </label>
+  <br>
+
+  <label>
+    Pin (4-8 digits) <input type='text' name='pin'>
+    {% with errors = get_flashed_messages(category_filter = ["pin"]) %}
+    {% if errors %}
+      {% for msg in errors %}
+        <p class="error">{{msg}}</p>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}   
+  </label>
+  <br>
+  <input type='submit' value='Reserve Seat'>
+  </form>
+</body>
+</html>

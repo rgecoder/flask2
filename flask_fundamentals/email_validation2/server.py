@@ -61,10 +61,13 @@ def delete():
   mysql = connectToMySQL('emails')
   id = int(request.form['hidden'])
   print(id)
-  query = "DELETE FROM emails WHERE id = '{}';".format(id)
+  query = "DELETE FROM emails WHERE id = %(id)s"
+  data = {
+    'id': id
+  }
   
   print(session['id'])
-  mysql.query_db(query)
+  mysql.query_db(query, data)
   return redirect('/success')
 
 
